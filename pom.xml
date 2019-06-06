@@ -117,7 +117,18 @@
             <version>1.2.47</version>
         </dependency>
 
-
+        <!-- https://mvnrepository.com/artifact/com.belerweb/pinyin4j -->
+        <!--<dependency>-->
+            <!--<groupId>com.belerweb</groupId>-->
+            <!--<artifactId>pinyin4j</artifactId>-->
+            <!--<version>2.5.0</version>-->
+        <!--</dependency>-->
+        <!-- https://mvnrepository.com/artifact/com.github.stuxuhai/jpinyin -->
+        <dependency>
+            <groupId>com.github.stuxuhai</groupId>
+            <artifactId>jpinyin</artifactId>
+            <version>1.1.8</version>
+        </dependency>
 
     </dependencies>
 
