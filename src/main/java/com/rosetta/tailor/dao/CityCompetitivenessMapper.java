@@ -15,5 +15,5 @@ public interface CityCompetitivenessMapper {
 
     int updateByPrimaryKey(CityCompetitiveness record);
 
-    CityCompetitiveness selectByPrimaryKey(String city);
+    CityCompetitiveness selectByCityName(String city);
 }

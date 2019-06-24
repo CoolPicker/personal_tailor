@@ -33,7 +33,7 @@ public class IdentifyCodeController {
     public Ret getCityCompetitiveness(@PathVariable("city") String city) {
         Ret ret = new Ret();
         try {
-            CityCompetitiveness cityCompetitiveness = cityCompetitivenessMapper.selectByPrimaryKey(city);
+            CityCompetitiveness cityCompetitiveness = cityCompetitivenessMapper.selectByCityName(city);
             ret.setState(Code.SUCCESS);
             ret.setData(cityCompetitiveness);
         } catch (Exception e) {
