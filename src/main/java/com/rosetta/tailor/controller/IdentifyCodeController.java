@@ -1,5 +1,7 @@
 package com.rosetta.tailor.controller;
 
+import com.rosetta.tailor.dao.CityCompetitivenessMapper;
+import com.rosetta.tailor.entity.CityCompetitiveness;
 import com.rosetta.tailor.entity.Code;
 import com.rosetta.tailor.entity.IdentifyCodePre;
 import com.rosetta.tailor.entity.Ret;
@@ -22,6 +24,24 @@ public class IdentifyCodeController {
 
     @Autowired
     private IdentifyCodePreService identifyCodePreService;
+    @Autowired
+    private CityCompetitivenessMapper cityCompetitivenessMapper;
+
+    @ApiOperation(value = "获取城市竞争力详情")
+    @ApiImplicitParam(name = "city",value = "城市",paramType = "path")
+    @GetMapping("/cityCompetitiveness/{city}")
+    public Ret getCityCompetitiveness(@PathVariable("city") String city) {
+        Ret ret = new Ret();
+        try {
+            CityCompetitiveness cityCompetitiveness = cityCompetitivenessMapper.selectByPrimaryKey(city);
+            ret.setState(Code.SUCCESS);
+            ret.setData(cityCompetitiveness);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ret.setState(Code.FALI);
+        }
+        return ret;
+    }
 
     @ApiOperation(value = "获取身份证编码对应详情")
     @ApiImplicitParams({
