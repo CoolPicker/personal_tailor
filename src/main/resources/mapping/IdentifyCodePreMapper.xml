@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rosetta.tailor.dao.IdentifyCodePreMapper" >
+  <resultMap id="BaseResultMap" type="com.rosetta.tailor.entity.IdentifyCodePre" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="six_code" property="sixCode" jdbcType="INTEGER" />
+    <result column="two_code" property="twoCode" jdbcType="INTEGER" />
+    <result column="four_code" property="fourCode" jdbcType="INTEGER" />
+    <result column="certificate_area" property="certificateArea" jdbcType="VARCHAR" />
+    <result column="identify_province" property="identifyProvince" jdbcType="VARCHAR" />
+    <result column="identify_city" property="identifyCity" jdbcType="VARCHAR" />
+    <result column="identify_area" property="identifyArea" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, six_code, four_code, certificate_area, identify_province, identify_city, identify_area,two_code
+  </sql>
+
+  <select id="selectIdentifyDetailsByPre" resultMap="BaseResultMap" parameterType="com.rosetta.tailor.entity.IdentifyCodePre" >
+    select
+    <include refid="Base_Column_List" />
+    from identify_code_pre
+    <where>
+      <if test="twoCode != null" >
+        and two_code = #{twoCode}
+      </if>
+      <if test="fourCode != null" >
+        and four_code = #{fourCode}
+      </if>
+      <if test="sixCode != null" >
+        and six_code = #{sixCode}
+      </if>
+    </where>
+    group by two_code
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from identify_code_pre
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from identify_code_pre
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.rosetta.tailor.entity.IdentifyCodePre" >
+    insert into identify_code_pre (id, six_code, four_code, 
+      certificate_area, identify_province, identify_city, 
+      identify_area)
+    values (#{id,jdbcType=INTEGER}, #{sixCode,jdbcType=INTEGER}, #{fourCode,jdbcType=INTEGER}, 
+      #{certificateArea,jdbcType=VARCHAR}, #{identifyProvince,jdbcType=VARCHAR}, #{identifyCity,jdbcType=VARCHAR}, 
+      #{identifyArea,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.rosetta.tailor.entity.IdentifyCodePre" >
+    insert into identify_code_pre
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="sixCode != null" >
+        six_code,
+      </if>
+      <if test="fourCode != null" >
+        four_code,
+      </if>
+      <if test="certificateArea != null" >
+        certificate_area,
+      </if>
+      <if test="identifyProvince != null" >
+        identify_province,
+      </if>
+      <if test="identifyCity != null" >
+        identify_city,
+      </if>
+      <if test="identifyArea != null" >
+        identify_area,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sixCode != null" >
+        #{sixCode,jdbcType=INTEGER},
+      </if>
+      <if test="fourCode != null" >
+        #{fourCode,jdbcType=INTEGER},
+      </if>
+      <if test="certificateArea != null" >
+        #{certificateArea,jdbcType=VARCHAR},
+      </if>
+      <if test="identifyProvince != null" >
+        #{identifyProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="identifyCity != null" >
+        #{identifyCity,jdbcType=VARCHAR},
+      </if>
+      <if test="identifyArea != null" >
+        #{identifyArea,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rosetta.tailor.entity.IdentifyCodePre" >
+    update identify_code_pre
+    <set >
+      <if test="sixCode != null" >
+        six_code = #{sixCode,jdbcType=INTEGER},
+      </if>
+      <if test="fourCode != null" >
+        four_code = #{fourCode,jdbcType=INTEGER},
+      </if>
+      <if test="certificateArea != null" >
+        certificate_area = #{certificateArea,jdbcType=VARCHAR},
+      </if>
+      <if test="identifyProvince != null" >
+        identify_province = #{identifyProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="identifyCity != null" >
+        identify_city = #{identifyCity,jdbcType=VARCHAR},
+      </if>
+      <if test="identifyArea != null" >
+        identify_area = #{identifyArea,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rosetta.tailor.entity.IdentifyCodePre" >
+    update identify_code_pre
+    set six_code = #{sixCode,jdbcType=INTEGER},
+      four_code = #{fourCode,jdbcType=INTEGER},
+      certificate_area = #{certificateArea,jdbcType=VARCHAR},
+      identify_province = #{identifyProvince,jdbcType=VARCHAR},
+      identify_city = #{identifyCity,jdbcType=VARCHAR},
+      identify_area = #{identifyArea,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
